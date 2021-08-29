@@ -17,6 +17,9 @@ def convert(from_cur, to_cur, amount: int):
     if from_cur in currency_dict.keys() and to_cur in currency_dict.keys():
         conversion = float(currency_dict[to_cur]) * amount
         return "1 USD = {} {}".format(conversion, to_cur)
+    else:
+        return "Currencies {}-{} not found".format(from_cur, to_cur), convert(FROM_CURRENCY, TO_CURRENCY, amount=int(
+            input("What is the amount of currency?")))
 
 
 if __name__ == '__main__':
@@ -28,4 +31,7 @@ if __name__ == '__main__':
     for currency, rate in conversion_rates.items():
         currency_dict[currency] = rate
 
-    print(convert(FROM_CURRENCY, TO_CURRENCY, 100))
+    while True:
+        print(convert(FROM_CURRENCY, TO_CURRENCY, amount=int(input("What is the amount of currency?"))))
+        if FROM_CURRENCY == 'quit' or TO_CURRENCY == 'quit':
+            break
